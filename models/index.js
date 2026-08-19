@@ -9,10 +9,26 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  const connectionURL = process.env[config.use_env_variable];
+
+  const URL = new URL(connectionURL);
+
+  url.searchparams.delete('sslmode');
+
+  sequelize = new Sequelize(url.toString(), {
+    dialect: 'postgres',
+    dialectOptions: {
+      ssl: {
+        rejectUnauthorized: false,
+        require: true
+      }
+    }
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
+
+
 
 fs.readdirSync(__dirname)
   .filter(file => {
