@@ -10,6 +10,7 @@ const development = {
 }
 
 const production = {
-
+    use_env_variable: 'POSTGRES_URL',
+    
 
 module.exports = { development, production }
