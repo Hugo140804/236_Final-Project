@@ -1,0 +1,25 @@
+const jwt = require('jsonwebtoken');
+
+module.exports = (req, res, next) => {
+  // 1. Ambil token dari header Authorization
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1]; // Format: Bearer <TOKEN>
+
+  // 2. Jika token tidak ada
+  if (!token) {
+    return res.status(401).json({ 
+      message: 'Akses ditolak. Token tidak ditemukan.' 
+    });
+  }
+
+  try {
+    // 3. Verifikasi token menggunakan JWT_SECRET
+    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    req.user = verified;
+    next(); // Lanjut ke controller
+  } catch (error) {
+    return res.status(403).json({ 
+      message: 'Token tidak valid atau sudah kadaluwarsa.' 
+    });
+  }
+};
