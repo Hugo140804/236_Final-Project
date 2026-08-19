@@ -18,7 +18,8 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(url.toString(), {
     dialect: 'postgres',
     dialectOptions: {
-      
+      ssl: {
+        
 
 
 
