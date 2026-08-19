@@ -10,6 +10,9 @@ app.use(express.urlencoded({ extended: true }));
 let databasseReady = false;
 let databasePromise = null;
 
+app.use((req, res, next) => {
+    
+
 app.use('/api', require('./routes/api'));
 
 async function startServer() {
