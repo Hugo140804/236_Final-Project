@@ -8,7 +8,10 @@ const config = require(__dirname + '/../config/config.js')[env];
 const db = {};
 
 let sequelize;
-if 
+if (config.use_env_variable) {
+  const connectionURL = process.env[config.use_env_variable];
+
+  
 
 
 
