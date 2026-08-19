@@ -13,7 +13,9 @@ if (config.use_env_variable) {
 
   const URL = new URL(connectionURL);
 
-  
+  url.searchparams.delete('sslmode');
+
+
 
 
 
