@@ -11,7 +11,13 @@ let databasseReady = false;
 let databasePromise = null;
 
 app.use((req, res, next) => {
-    
+    try {
+        if (!databasseReady) {
+            if (!databasePromise) {
+                databasePromise = connectDatabase();
+            }
+
+            
 
 app.use('/api', require('./routes/api'));
 
