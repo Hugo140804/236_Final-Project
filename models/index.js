@@ -19,14 +19,14 @@ if (config.use_env_variable) {
     dialect: 'postgres',
     dialectOptions: {
       ssl: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: false
         require: true
       }
     }
   });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
-
+}
 
 
 
