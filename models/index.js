@@ -11,6 +11,8 @@ let sequelize;
 if (config.use_env_variable) {
   const connectionURL = process.env[config.use_env_variable];
 
+  const URL = new URL(connectionURL);
+
   
 
 
