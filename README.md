@@ -159,22 +159,19 @@ node scripts/seed-production.js
 
 ---
 
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/df255325-30e2-4dba-9099-ee209225c669" />
 
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/f65977cd-49cd-4ebf-a7c0-e20f0afe7e7c" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 225632" src="https://github.com/user-attachments/assets/37649be8-3eb0-4a40-b337-132fdfca2420" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 225721" src="https://github.com/user-attachments/assets/98643205-af89-466f-8efa-ca9fb510c927" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 225810" src="https://github.com/user-attachments/assets/cc7929cd-7917-4875-9a15-5d96c1d64d02" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231430" src="https://github.com/user-attachments/assets/6dd046c9-7cd3-42e4-8c4b-80ec174bc4d3" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231549" src="https://github.com/user-attachments/assets/b98217b0-d52b-4f2d-8aeb-5f4a637e8c2f" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231704" src="https://github.com/user-attachments/assets/0f6e9b85-3d89-42db-a2cf-ebd67cac2ce9" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231725" src="https://github.com/user-attachments/assets/1a32cd16-6d45-439f-bfcc-ab845536025c" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231731" src="https://github.com/user-attachments/assets/2a8aed7b-3e64-484e-88e1-572917911b34" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231752" src="https://github.com/user-attachments/assets/c41967c1-667e-4760-b4ee-7926becb6424" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231825" src="https://github.com/user-attachments/assets/467dacd5-94e3-43ef-9072-558c2930099f" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231842" src="https://github.com/user-attachments/assets/7ee1c94c-1319-42b4-882a-213e1515fbbf" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231910" src="https://github.com/user-attachments/assets/568abe7c-dbb7-465c-a27a-d6ecb155cc1f" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 231923" src="https://github.com/user-attachments/assets/4751de6b-8271-456b-8a7b-96dd288de8a6" />
+<img width="960" height="564" alt="Screenshot 2026-08-24 232101" src="https://github.com/user-attachments/assets/705d92d7-de97-4282-b8d9-895e16363bc5" />
 
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/83128a76-dc11-44b0-863f-067dfb6e5f7c" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/c8f52db1-0bdb-4e76-af35-8e1671e31f2b" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/962a3875-8424-4645-a795-4624724d222b" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/a8aed5a1-f827-472f-9b4a-f200940bf791" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/f2b59db7-d243-4e74-9689-183476bc15f9" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/59b05d80-34a4-4a00-b149-ec35c6fe15b9" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/3c353d6f-a129-4f40-8b49-61fb3297a8e4" />
-
-<img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/14570639-8f83-4695-aa7a-d9fed6e4b866" />
