@@ -103,12 +103,12 @@ Alur SaaS: **Login (JWT) → Buat API Key → Konsumen akses data dengan API Key
 **1. Login lalu buat API key**
 ```bash
 # Login (simpan token dari respon)
-curl -X POST https://236-api-deployment.vercel.app/api/login \
+curl -X POST https://236-final-project.vercel.app/api/login \
   -H "Content-Type: application/json" \
   -d '{"email":"andi@blockchain.dev","password":"password123"}'
 
 # Buat API key (gunakan token JWT dari login)
-curl -X POST https://236-api-deployment.vercel.app/api/apikey \
+curl -X POST https://236-final-project.vercel.app/api/apikey \
   -H "Content-Type: application/json" \
   -H "Authorization: Bearer <token>" \
   -d '{"nama":"Production Key"}'
@@ -117,7 +117,7 @@ curl -X POST https://236-api-deployment.vercel.app/api/apikey \
 
 **2. Konsumen mengambil data dengan API key**
 ```bash
-curl https://236-api-deployment.vercel.app/api/blockchain \
+curl https://236-final-project.vercel.app/api/blockchain \
   -H "x-api-key: blk_xxxxxxxx..."
 # → 200, array JSON berisi 60 data blockchain beserta pengembang & kategori
 ```

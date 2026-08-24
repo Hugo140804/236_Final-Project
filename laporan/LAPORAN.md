@@ -377,7 +377,7 @@ Langkah deployment:
    `sequelize.sync({ alter: true })` membuat tabel otomatis saat aplikasi pertama
    kali berjalan.
 
-URL deployment: **https://236-api-deployment.vercel.app**
+URL deployment: **https://236-final-project.vercel.app**
 
 ---
 
@@ -420,7 +420,7 @@ URL deployment: **https://236-api-deployment.vercel.app**
 ### A. Link Penting
 
 - **Repository GitHub:** https://github.com/Hugo140804/236_API_Deployment
-- **Deployment Vercel:** https://236-api-deployment.vercel.app
+- **Deployment Vercel:** https://236-final-project.vercel.app
 - **Postman Collection:** folder `postman/Blockchain_API.postman_collection.json`
 
 ### B. Akun Demo Hasil Seeder

@@ -2,18 +2,23 @@
   "info": {
     "_postman_id": "9f1c3a2b-4d5e-6f78-9abc-def012345678",
     "name": "Blockchain API (236 Final Project)",
-    "description": "REST API untuk mengelola data Blockchain, Kategori, dan Pengembang.\n\nSetup variabel:\n- baseUrl = https://236-api-deployment.vercel.app (atau http://localhost:3000 untuk lokal)\n- token = akan terisi otomatis setelah request Login dijalankan\n\nSemua akun seed (password123): andi@blockchain.dev, budi@blockchain.dev, citra@blockchain.dev",
+    "description": "REST API untuk mengelola data Blockchain, Kategori, dan Pengembang.\n\nSetup variabel:\n- baseUrl = https://236-final-project.vercel.app (atau http://localhost:3000 untuk lokal)\n- token = akan terisi otomatis setelah request Login dijalankan\n\nSemua akun seed (password123): andi@blockchain.dev, budi@blockchain.dev, citra@blockchain.dev",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://236-api-deployment.vercel.app",
+      "value": "https://236-final-project.vercel.app",
       "type": "string"
     },
     {
       "key": "token",
       "value": "",
+      "type": "string"
+    },
+    {
+      "key": "apikey",
+      "value": "blk_demo_andi_236",
       "type": "string"
     }
   ],
