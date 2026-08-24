@@ -33,3 +33,17 @@ app.use(async (req, res, next) => {
 app.use("/api", require("./routes/api"));
 
 module.exports = app;
+
+// Jalankan server lokal saat dieksekusi langsung (npm start / node index.js).
+// Pada deployment Vercel, file ini di-import sebagai serverless function,
+// sehingga blok listen dilewati (require.main !== module).
+if (require.main === module) {
+    const PORT = process.env.PORT || 3000;
+
+    app.listen(PORT, () => {
+        console.log(`==============================================`);
+        console.log(`  Blockchain API berjalan di http://localhost:${PORT}`);
+        console.log(`  Endpoint: http://localhost:${PORT}/api/...`);
+        console.log(`==============================================`);
+    });
+}
