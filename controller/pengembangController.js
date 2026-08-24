@@ -103,7 +103,16 @@ async function login(req, res) {
   }
 }
 
+async function me(req, res) {
+  return res.status(200).json({
+    id: req.user.id,
+    nama: req.user.nama,
+    email: req.user.email
+  });
+}
+
 module.exports = {
   register,
-  login
+  login,
+  me
 };

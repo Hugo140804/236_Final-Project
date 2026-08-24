@@ -10,6 +10,7 @@ const authOrApiKey = require('../middleware/apiKeyMiddleware');
 // ===== Autentikasi pengembang (JWT) =====
 router.post("/register", pengembangController.register);
 router.post("/login", pengembangController.login);
+router.get("/me", authMiddleware, pengembangController.me);
 
 // ===== Manajemen API Key (khusus login JWT) =====
 router.post("/apikey", authMiddleware, apiKeyController.create);

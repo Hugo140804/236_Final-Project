@@ -48,6 +48,12 @@ async function create(req, res) {
       });
     }
 
+    if (!pengembang_id) {
+      return res.status(400).json({
+        message: "pengembang_id wajib diisi."
+      });
+    }
+
     const pengembang = await Pengembang.findByPk(pengembang_id);
     if (!pengembang) {
       return res.status(404).json({
@@ -77,7 +83,8 @@ async function create(req, res) {
       include: [
         {
           model: Pengembang,
-          as: "pengembang"
+          as: "pengembang",
+          attributes: ["id", "nama", "email"]
         },
         {
           model: Kategori,
@@ -144,7 +151,8 @@ async function update(req, res) {
       include: [
         {
           model: Pengembang,
-          as: "pengembang"
+          as: "pengembang",
+          attributes: ["id", "nama", "email"]
         },
         {
           model: Kategori,
