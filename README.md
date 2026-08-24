@@ -3,14 +3,103 @@
 REST API untuk mengelola data **Blockchain**, **Kategori**, dan **Pengembang**.
 Dibangun dengan Node.js, Express, Sequelize, dan PostgreSQL. Di-deploy ke Vercel.
 
-**Endpoint:**
-- `POST /api/register` - Registrasi pengembang
-- `POST /api/login` - Login pengembang
-- `GET/POST/PUT/DELETE /api/blockchain` - CRUD data blockchain
-- `GET/POST/PUT/DELETE /api/kategori` - CRUD kategori blockchain
+## Fitur
+- Autentikasi JWT (register & login pengembang)
+- CRUD data blockchain (nama, deskripsi, tahun_rilis, pengembang)
+- CRUD kategori blockchain (DeFi, NFT, Layer 1, Smart Contract, dll.)
+- Relasi many-to-many Blockchain ↔ Kategori
+
+## Teknologi
+Node.js • Express 5 • Sequelize 6 • PostgreSQL • bcrypt • JWT
+
+## Setup Lokal
+
+```bash
+# 1. Install dependency
+npm install
+
+# 2. Buat file .env (contoh)
+#    DB_USER=postgres
+#    DB_PASS=password_kamu
+#    DB_DATABASE=blockchain_db
+#    DB_HOST=127.0.0.1
+#    DB_PORT=5432
+#    DB_DIALECT=postgres
+#    JWT_SECRET=rahasia_super_aman
+#    JWT_EXPIRES=1h
+
+# 3. (Opsional) Buat tabel via migration + isi data contoh via seeder
+npx sequelize-cli db:migrate
+npx sequelize-cli db:seed:all
+
+# 4. Jalankan server
+npm start
+```
+
+Akun seeder (password semua `password123`):
+`andi@blockchain.dev`, `budi@blockchain.dev`, `citra@blockchain.dev`
+
+> Catatan: tanpa migration, tabel akan otomatis dibuat saat server pertama kali berjalan (via `sequelize.sync({ alter: true })`).
+
+## Endpoint
+
+| Method | Endpoint | Deskripsi | Auth |
+|---|---|---|---|
+| POST | `/api/register` | Registrasi pengembang baru | - |
+| POST | `/api/login` | Login & dapatkan token JWT | - |
+| GET | `/api/blockchain` | Ambil semua data blockchain | ✅ Bearer |
+| POST | `/api/blockchain` | Tambah data blockchain | ✅ Bearer |
+| PUT | `/api/blockchain/:id` | Update data blockchain | ✅ Bearer |
+| DELETE | `/api/blockchain/:id` | Hapus data blockchain | ✅ Bearer |
+| GET | `/api/kategori` | Ambil semua kategori | ✅ Bearer |
+| POST | `/api/kategori` | Tambah kategori | ✅ Bearer |
+| PUT | `/api/kategori/:id` | Update kategori | ✅ Bearer |
+| DELETE | `/api/kategori/:id` | Hapus kategori | ✅ Bearer |
+
+### Contoh Request
+
+**Register**
+```json
+POST /api/register
+{ "nama": "Andi Pratama", "email": "andi@blockchain.dev", "password": "password123" }
+```
+
+**Login** → simpan `token` untuk dipakai di header `Authorization: Bearer <token>`
+```json
+POST /api/login
+{ "email": "andi@blockchain.dev", "password": "password123" }
+```
+
+**Tambah Blockchain**
+```json
+POST /api/blockchain
+Authorization: Bearer <token>
+{
+  "nama": "Ethereum",
+  "deskripsi": "Platform blockchain open-source untuk smart contract dan dApps",
+  "tahun_rilis": 2015,
+  "pengembang_id": 1,
+  "kategori_ids": [1, 2]
+}
+```
+
+**Tambah Kategori**
+```json
+POST /api/kategori
+Authorization: Bearer <token>
+{ "nama": "DeFi", "deskripsi": "Keuangan terdesentralisasi tanpa perantara bank" }
+```
+
+## Postman Collection
+File `postman/Blockchain_API.postman_collection.json` berisi 10 request siap pakai.
+Import ke Postman lalu jalankan **Login** terlebih dahulu — token akan terisi otomatis.
+
+## Deployment (Vercel)
+Push ke GitHub lalu hubungkan repo di [vercel.com](https://vercel.com). Vercel akan
+men-deploy otomatis. Environment variables yang dibutuhkan di Vercel:
+`POSTGRES_URL`, `JWT_SECRET`, `JWT_EXPIRES`.
 
 ---
-
 
 <img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/df255325-30e2-4dba-9099-ee209225c669" />
 
