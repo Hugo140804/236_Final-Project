@@ -4,13 +4,16 @@ REST API untuk mengelola data **Blockchain**, **Kategori**, dan **Pengembang**.
 Dibangun dengan Node.js, Express, Sequelize, dan PostgreSQL. Di-deploy ke Vercel.
 
 ## Fitur
-- Autentikasi JWT (register & login pengembang)
-- CRUD data blockchain (nama, deskripsi, tahun_rilis, pengembang)
-- CRUD kategori blockchain (DeFi, NFT, Layer 1, Smart Contract, dll.)
+- **SaaS API**: data disediakan ke pihak lain menggunakan **API key** (seperti OpenRouter / Weather API)
+- Autentikasi **JWT** (register & login pengembang)
+- Manajemen **API key** (buat, lihat, nonaktifkan)
+- CRUD data blockchain (nama, simbol, deskripsi, tahun_rilis, pengembang)
+- CRUD kategori blockchain (Layer 1, DeFi, NFT, Stablecoin, dll.)
 - Relasi many-to-many Blockchain ↔ Kategori
+- **60 data blockchain** + 13 kategori + 8 pengembang (via seeder)
 
 ## Teknologi
-Node.js • Express 5 • Sequelize 6 • PostgreSQL • bcrypt • JWT
+Node.js • Express 5 • Sequelize 6 • PostgreSQL/Supabase • bcrypt • JWT • Vercel
 
 ## Setup Lokal
 
@@ -47,14 +50,17 @@ Akun seeder (password semua `password123`):
 |---|---|---|---|
 | POST | `/api/register` | Registrasi pengembang baru | - |
 | POST | `/api/login` | Login & dapatkan token JWT | - |
-| GET | `/api/blockchain` | Ambil semua data blockchain | ✅ Bearer |
-| POST | `/api/blockchain` | Tambah data blockchain | ✅ Bearer |
-| PUT | `/api/blockchain/:id` | Update data blockchain | ✅ Bearer |
-| DELETE | `/api/blockchain/:id` | Hapus data blockchain | ✅ Bearer |
-| GET | `/api/kategori` | Ambil semua kategori | ✅ Bearer |
-| POST | `/api/kategori` | Tambah kategori | ✅ Bearer |
-| PUT | `/api/kategori/:id` | Update kategori | ✅ Bearer |
-| DELETE | `/api/kategori/:id` | Hapus kategori | ✅ Bearer |
+| POST | `/api/apikey` | Buat API key baru | ✅ JWT |
+| GET | `/api/apikey` | Lihat daftar API key sendiri | ✅ JWT |
+| DELETE | `/api/apikey/:id` | Nonaktifkan API key | ✅ JWT |
+| GET | `/api/blockchain` | Ambil semua data blockchain | ✅ API Key / JWT |
+| POST | `/api/blockchain` | Tambah data blockchain | ✅ JWT |
+| PUT | `/api/blockchain/:id` | Update data blockchain | ✅ JWT |
+| DELETE | `/api/blockchain/:id` | Hapus data blockchain | ✅ JWT |
+| GET | `/api/kategori` | Ambil semua kategori | ✅ API Key / JWT |
+| POST | `/api/kategori` | Tambah kategori | ✅ JWT |
+| PUT | `/api/kategori/:id` | Update kategori | ✅ JWT |
+| DELETE | `/api/kategori/:id` | Hapus kategori | ✅ JWT |
 
 ### Contoh Request
 
@@ -90,9 +96,44 @@ Authorization: Bearer <token>
 { "nama": "DeFi", "deskripsi": "Keuangan terdesentralisasi tanpa perantara bank" }
 ```
 
+### Menggunakan API Key (untuk Konsumen)
+
+Alur SaaS: **Login (JWT) → Buat API Key → Konsumen akses data dengan API Key**.
+
+**1. Login lalu buat API key**
+```bash
+# Login (simpan token dari respon)
+curl -X POST https://236-api-deployment.vercel.app/api/login \
+  -H "Content-Type: application/json" \
+  -d '{"email":"andi@blockchain.dev","password":"password123"}'
+
+# Buat API key (gunakan token JWT dari login)
+curl -X POST https://236-api-deployment.vercel.app/api/apikey \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer <token>" \
+  -d '{"nama":"Production Key"}'
+# → { "key": "blk_xxxxxxxx..." }
+```
+
+**2. Konsumen mengambil data dengan API key**
+```bash
+curl https://236-api-deployment.vercel.app/api/blockchain \
+  -H "x-api-key: blk_xxxxxxxx..."
+# → 200, array JSON berisi 60 data blockchain beserta pengembang & kategori
+```
+
+**API Key Demo hasil seeder:** `blk_demo_andi_236`
+
+## Laporan Final Project
+Laporan lengkap (pendahuluan, tinjauan pustaka, analisis & perancangan,
+**ERD**, **use case diagram**, **activity diagram**, pengujian, dan deployment)
+terdapat di folder [`laporan/LAPORAN.md`](laporan/LAPORAN.md). Diagram juga
+tersedia sebagai file `.mmd` di `laporan/diagrams/` untuk diekspor ke PNG/SVG.
+
 ## Postman Collection
-File `postman/Blockchain_API.postman_collection.json` berisi 10 request siap pakai.
-Import ke Postman lalu jalankan **Login** terlebih dahulu — token akan terisi otomatis.
+File `postman/Blockchain_API.postman_collection.json` berisi request siap pakai
+(termasuk endpoint API key). Import ke Postman lalu jalankan **Login** terlebih
+dahulu — token akan terisi otomatis.
 
 ## Deployment (Vercel)
 Push ke GitHub lalu hubungkan repo di [vercel.com](https://vercel.com). Vercel akan

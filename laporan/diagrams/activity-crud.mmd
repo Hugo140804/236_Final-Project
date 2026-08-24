@@ -1,0 +1,10 @@
+flowchart TD
+    A([Mulai]) --> B[Login JWT]
+    B --> C[Request POST / PUT / DELETE]
+    C --> D{Token JWT valid?}
+    D -->|Tidak| E[401 Unauthorized]
+    D -->|Ya| F[Validasi input body]
+    F --> G[Proses ke database]
+    G --> H[Respon JSON berhasil]
+    H --> I([Selesai])
+    E --> I

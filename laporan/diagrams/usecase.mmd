@@ -1,0 +1,17 @@
+flowchart LR
+    subgraph Sistem["Sistem Blockchain API"]
+        R[Registrasi Akun]
+        L[Login JWT]
+        AK[Buat / Lihat / Nonaktifkan API Key]
+        CB[Kelola Data Blockchain<br/>Tambah - Ubah - Hapus]
+        CK[Kelola Kategori<br/>Tambah - Ubah - Hapus]
+        GB[Lihat Data Blockchain]
+        GK[Lihat Data Kategori]
+    end
+    P[Pengembang] --> R
+    P --> L
+    P --> AK
+    P --> CB
+    P --> CK
+    K[Konsumen API] --> GB
+    K --> GK

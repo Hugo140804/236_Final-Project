@@ -13,6 +13,11 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false
       },
+      simbol: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        unique: true
+      },
       deskripsi: {
         type: Sequelize.TEXT,
         allowNull: true

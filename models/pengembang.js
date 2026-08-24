@@ -28,6 +28,11 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'pengembang_id',
             as: 'blockchain'
         });
+
+        Pengembang.hasMany(models.ApiKey, {
+            foreignKey: 'pengembang_id',
+            as: 'apiKeys'
+        });
     };
 
     return Pengembang; // WAJIB ADA: Biar gak undefined

@@ -9,6 +9,11 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        simbol: {
+            type: DataTypes.STRING,
+            allowNull: false,
+            unique: true
+        },
         deskripsi: {
             type: DataTypes.TEXT,
             allowNull: true

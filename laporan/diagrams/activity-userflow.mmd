@@ -1,0 +1,10 @@
+flowchart TD
+    A([Mulai]) --> B[Registrasi & Login via JWT]
+    B --> C[Generate API Key pada /api/apikey]
+    C --> D[Konsumen kirim GET<br/>dengan header x-api-key]
+    D --> E{API Key valid & aktif?}
+    E -->|Tidak| F[401 Unauthorized]
+    E -->|Ya| G[Middleware mencatat terakhir_dipakai]
+    G --> H[Data JSON dikembalikan]
+    H --> I([Selesai])
+    F --> I

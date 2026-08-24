@@ -35,11 +35,18 @@ async function create(req, res) {
   try {
     const {
       nama,
+      simbol,
       deskripsi,
       tahun_rilis,
       pengembang_id,
       kategori_ids
     } = req.body;
+
+    if (!nama || !simbol) {
+      return res.status(400).json({
+        message: "Nama dan simbol blockchain wajib diisi."
+      });
+    }
 
     const pengembang = await Pengembang.findByPk(pengembang_id);
     if (!pengembang) {
@@ -50,6 +57,7 @@ async function create(req, res) {
 
     const blockchain = await Blockchain.create({
       nama,
+      simbol,
       deskripsi,
       tahun_rilis,
       pengembang_id
@@ -99,6 +107,7 @@ async function update(req, res) {
 
     const {
       nama,
+      simbol,
       deskripsi,
       tahun_rilis,
       pengembang_id,
@@ -115,6 +124,7 @@ async function update(req, res) {
 
     await blockchain.update({
       nama,
+      simbol,
       deskripsi,
       tahun_rilis,
       pengembang_id

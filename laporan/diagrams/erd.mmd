@@ -1,0 +1,40 @@
+erDiagram
+    PENGEMBANG {
+        int id PK
+        string nama
+        string email UK
+        string password
+    }
+    API_KEY {
+        int id PK
+        int pengembang_id FK
+        string nama
+        string key UK
+        boolean aktif
+        date terakhir_dipakai
+        date createdAt
+        date updatedAt
+    }
+    BLOCKCHAIN {
+        int id PK
+        string nama
+        string simbol UK
+        text deskripsi
+        int tahun_rilis
+        int pengembang_id FK
+    }
+    KATEGORI {
+        int id PK
+        string nama UK
+        string deskripsi
+    }
+    BLOCKCHAIN_KATEGORI {
+        int blockchain_id PK,FK
+        int kategori_id PK,FK
+        date createdAt
+        date updatedAt
+    }
+    PENGEMBANG ||--o{ BLOCKCHAIN : "menulis"
+    PENGEMBANG ||--o{ API_KEY : "memiliki"
+    BLOCKCHAIN ||--o{ BLOCKCHAIN_KATEGORI : ""
+    KATEGORI ||--o{ BLOCKCHAIN_KATEGORI : ""
