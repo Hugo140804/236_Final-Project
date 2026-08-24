@@ -140,6 +140,23 @@ Push ke GitHub lalu hubungkan repo di [vercel.com](https://vercel.com). Vercel a
 men-deploy otomatis. Environment variables yang dibutuhkan di Vercel:
 `POSTGRES_URL`, `JWT_SECRET`, `JWT_EXPIRES`.
 
+### Mengisi data (seed) ke database produksi
+Setelah deploy, akun & data contoh **belum** ada di database produksi. Login
+`andi@blockchain.dev` akan gagal (401) sampai seed dijalankan. Caranya:
+
+```bash
+# 1. Ambil connection string dari Vercel (Settings > Environment Variables)
+#    atau dari Supabase (Project Settings > Database)
+$env:POSTGRES_URL="postgres://user:password@host:5432/database"
+
+# 2. Jalankan script seed (otomatis isi 8 pengembang, 13 kategori,
+#    60 blockchain, 81 relasi, dan API key demo)
+node scripts/seed-production.js
+```
+
+> Alternatif cepat: daftar akun baru via `POST /api/register` lalu buat API key
+> via `POST /api/apikey` (tanpa seed 60 data).
+
 ---
 
 <img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/df255325-30e2-4dba-9099-ee209225c669" />
