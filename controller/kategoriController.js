@@ -1,12 +1,12 @@
 const db = require("../models");
 
-const Genre = db.Genre;
+const Kategori = db.Kategori;
 
 async function getAll(req, res) {
   try {
-    const genres = await Genre.findAll();
+    const kategoris = await Kategori.findAll();
 
-    return res.status(200).json(genres);
+    return res.status(200).json(kategoris);
   } catch (error) {
     return res.status(500).json({
       message: error.message
@@ -20,28 +20,28 @@ async function create(req, res) {
 
     if (!nama) {
       return res.status(400).json({
-        message: "Nama genre wajib diisi."
+        message: "Nama kategori wajib diisi."
       });
     }
 
-    const existingGenre = await Genre.findOne({
+    const existingKategori = await Kategori.findOne({
       where: { nama }
     });
 
-    if (existingGenre) {
+    if (existingKategori) {
       return res.status(400).json({
-        message: "Genre sudah ada."
+        message: "Kategori sudah ada."
       });
     }
 
-    const genre = await Genre.create({
+    const kategori = await Kategori.create({
       nama,
       deskripsi
     });
 
     return res.status(201).json({
-      message: "Genre berhasil ditambahkan.",
-      data: genre
+      message: "Kategori berhasil ditambahkan.",
+      data: kategori
     });
   } catch (error) {
     return res.status(500).json({
@@ -55,22 +55,22 @@ async function update(req, res) {
     const { id } = req.params;
     const { nama, deskripsi } = req.body;
 
-    const genre = await Genre.findByPk(id);
+    const kategori = await Kategori.findByPk(id);
 
-    if (!genre) {
+    if (!kategori) {
       return res.status(404).json({
-        message: "Genre tidak ditemukan."
+        message: "Kategori tidak ditemukan."
       });
     }
 
-    await genre.update({
+    await kategori.update({
       nama,
       deskripsi
     });
 
     return res.status(200).json({
-      message: "Genre berhasil diperbarui.",
-      data: genre
+      message: "Kategori berhasil diperbarui.",
+      data: kategori
     });
   } catch (error) {
     return res.status(500).json({
@@ -83,26 +83,26 @@ async function remove(req, res) {
   try {
     const { id } = req.params;
 
-    const genre = await Genre.findByPk(id);
+    const kategori = await Kategori.findByPk(id);
 
-    if (!genre) {
+    if (!kategori) {
       return res.status(404).json({
-        message: "Genre tidak ditemukan."
+        message: "Kategori tidak ditemukan."
       });
     }
 
-    const komik = await genre.getKomik();
+    const blockchain = await kategori.getBlockchain();
 
-    if (komik.length > 0) {
+    if (blockchain.length > 0) {
       return res.status(400).json({
-        message: "Genre masih digunakan oleh komik dan tidak dapat dihapus."
+        message: "Kategori masih digunakan oleh blockchain dan tidak dapat dihapus."
       });
     }
 
-    await genre.destroy();
+    await kategori.destroy();
 
     return res.status(200).json({
-      message: "Genre berhasil dihapus."
+      message: "Kategori berhasil dihapus."
     });
   } catch (error) {
     return res.status(500).json({

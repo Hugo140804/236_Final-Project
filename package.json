@@ -10,9 +10,9 @@
     "sequelize": "^6.37.8",
     "sequelize-cli": "^6.6.5"
   },
-  "name": "pertemuan-10",
+  "name": "blockchain-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "Blockchain API - REST API untuk mengelola data blockchain, kategori, dan pengembang (Final Project 236)",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

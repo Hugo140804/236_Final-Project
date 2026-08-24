@@ -2,7 +2,7 @@ const db = require("../models");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
-const Penulis = db.Penulis;
+const Pengembang = db.Pengembang;
 
 async function register(req, res) {
   try {
@@ -14,11 +14,11 @@ async function register(req, res) {
       });
     }
 
-    const existingPenulis = await Penulis.findOne({
+    const existingPengembang = await Pengembang.findOne({
       where: { email }
     });
 
-    if (existingPenulis) {
+    if (existingPengembang) {
       return res.status(400).json({
         message: "Email sudah terdaftar."
       });
@@ -26,7 +26,7 @@ async function register(req, res) {
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const penulis = await Penulis.create({
+    const pengembang = await Pengembang.create({
       nama,
       email,
       password: hashedPassword
@@ -35,9 +35,9 @@ async function register(req, res) {
     return res.status(201).json({
       message: "Registrasi berhasil.",
       data: {
-        id: penulis.id,
-        nama: penulis.nama,
-        email: penulis.email
+        id: pengembang.id,
+        nama: pengembang.nama,
+        email: pengembang.email
       }
     });
 
@@ -58,11 +58,11 @@ async function login(req, res) {
       });
     }
 
-    const penulis = await Penulis.findOne({
+    const pengembang = await Pengembang.findOne({
       where: { email }
     });
 
-    if (!penulis) {
+    if (!pengembang) {
       return res.status(401).json({
         message: "Email atau password salah."
       });
@@ -70,7 +70,7 @@ async function login(req, res) {
 
     const validPassword = await bcrypt.compare(
       password,
-      penulis.password
+      pengembang.password
     );
 
     if (!validPassword) {
@@ -81,9 +81,9 @@ async function login(req, res) {
 
     const token = jwt.sign(
       {
-        id: penulis.id,
-        nama: penulis.nama,
-        email: penulis.email
+        id: pengembang.id,
+        nama: pengembang.nama,
+        email: pengembang.email
       },
       process.env.JWT_SECRET,
       {

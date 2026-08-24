@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Genre = sequelize.define("Genre", {
+    const Kategori = sequelize.define("Kategori", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -15,18 +15,18 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: true
         }
     }, {
-        tableName: 'genres',
+        tableName: 'kategori',
         timestamps: false
     });
 
-    Genre.associate = (models) => {
-        Genre.belongsToMany(models.Komik, {
-            through: 'KomikGenre',
-            foreignKey: 'genre_id',
-            otherKey: 'komik_id',
-            as: 'komik'
+    Kategori.associate = (models) => {
+        Kategori.belongsToMany(models.Blockchain, {
+            through: 'BlockchainKategori',
+            foreignKey: 'kategori_id',
+            otherKey: 'blockchain_id',
+            as: 'blockchain'
         });
     };
 
-    return Genre;
+    return Kategori;
 };

@@ -1,3 +1,17 @@
+# Blockchain API
+
+REST API untuk mengelola data **Blockchain**, **Kategori**, dan **Pengembang**.
+Dibangun dengan Node.js, Express, Sequelize, dan PostgreSQL. Di-deploy ke Vercel.
+
+**Endpoint:**
+- `POST /api/register` - Registrasi pengembang
+- `POST /api/login` - Login pengembang
+- `GET/POST/PUT/DELETE /api/blockchain` - CRUD data blockchain
+- `GET/POST/PUT/DELETE /api/kategori` - CRUD kategori blockchain
+
+---
+
+
 <img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/df255325-30e2-4dba-9099-ee209225c669" />
 
 <img width="1920" height="1092" alt="image" src="https://github.com/user-attachments/assets/f65977cd-49cd-4ebf-a7c0-e20f0afe7e7c" />

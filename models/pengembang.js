@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Penulis = sequelize.define("Penulis", {
+    const Pengembang = sequelize.define("Pengembang", {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -19,16 +19,16 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         }
     }, {
-        tableName: 'penulis',
+        tableName: 'pengembang',
         timestamps: false
     });
 
-    Penulis.associate = (models) => {
-        Penulis.hasMany(models.Komik, {
-            foreignKey: 'penulis_id',
-            as: 'komik'
+    Pengembang.associate = (models) => {
+        Pengembang.hasMany(models.Blockchain, {
+            foreignKey: 'pengembang_id',
+            as: 'blockchain'
         });
     };
 
-    return Penulis; // WAJIB ADA: Biar gak undefined
+    return Pengembang; // WAJIB ADA: Biar gak undefined
 };
