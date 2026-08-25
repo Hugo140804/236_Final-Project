@@ -1,0 +1,272 @@
+===============================================================
+ NASKAH PRESENTASI FINAL PROJECT 236
+ "Blockchain API - SaaS dengan API Key"
+ (Durasi perkiraan: 10-15 menit)
+===============================================================
+
+PETUNJUK:
+- Ganti [NAMA] dan [NIM] dengan identitas Anda.
+- Baca dengan suara jelas dan santai, tidak perlu dihafal sempurna.
+- Bagian "AKSI" adalah instruksi demo yang dilakukan langsung di laptop.
+
+===============================================================
+SLIDE 1 - HALAMAN JUDUL & PERKENALAN
+===============================================================
+
+Assalamu'alaikum warahmatullahi wabarakatuh. Selamat pagi/siang/sore
+Bapak/Ibu penguji dan teman-teman sekalian.
+
+Perkenalkan, nama saya [NAMA], NIM [NIM], dari kelas 236. Pada
+kesempatan ini, saya akan mempresentasikan Final Project saya yang
+berjudul "Blockchain API", sebuah layanan Software as a Service yang
+menyediakan data blockchain kepada pengguna lain dengan menggunakan
+API key.
+
+===============================================================
+SLIDE 2 - LATAR BELAKANG & RUMUSAN MASALAH
+===============================================================
+
+Sebelum masuk ke pembahasan, saya mulai dari latar belakang.
+
+Seiring berkembangnya teknologi blockchain, kebutuhan akan data
+blockchain yang cepat, terstruktur, dan aman semakin tinggi. Banyak
+aplikasi membutuhkan informasi mengenai aset kripto dan teknologi
+blockchain. Namun, data tersebut sering tersebar dan belum tersedia
+dalam bentuk API yang siap pakai.
+
+Oleh karena itu, pada project ini saya membangun sebuah API yang
+memberikan data kepada orang lain, dengan konsep yang sama seperti
+layanan OpenRouter atau Weather API. Intinya, pengguna mendaftar,
+mendapatkan API key, lalu menggunakannya untuk mengambil data.
+
+Permasalahan yang ingin saya jawab ada tiga. Pertama, bagaimana
+membangun REST API SaaS berbasis API key. Kedua, bagaimana mengamankan
+akses data menggunakan JWT dan API key. Dan ketiga, bagaimana
+menyediakan minimal 50 data yang kompleks serta men-deploy-nya ke Vercel.
+
+===============================================================
+SLIDE 3 - SOLUSI & FITUR APLIKASI
+===============================================================
+
+Solusi yang saya bangun adalah Blockchain API dengan fitur-fitur utama:
+
+Pertama, autentikasi menggunakan JWT untuk login dan manajemen akun.
+
+Kedua, sistem API key untuk konsumen. Konsumen tidak perlu login
+dengan username dan password, cukup memakai satu kunci API yang
+dikirim lewat header x-api-key. Ini pola standar SaaS.
+
+Ketiga, CRUD data blockchain dan kategori, lengkap dengan relasi
+many-to-many antara blockchain dan kategori.
+
+Dan keempat, data berjumlah 60 data blockchain, 13 kategori, dan
+8 pengembang, sehingga melebihi syarat minimal 50 data.
+
+===============================================================
+SLIDE 4 - TECH STACK / TEKNOLOGI
+===============================================================
+
+Untuk teknologi, sesuai ketentuan tugas, saya menggunakan:
+
+- Express.js sebagai framework backend Node.js.
+- PostgreSQL sebagai database, dengan dukungan Supabase di cloud.
+- Sequelize sebagai ORM untuk memudahkan migrasi dan seeding data.
+- JWT dan bcrypt untuk autentikasi.
+- Dan Vercel untuk deployment.
+
+Arsitekturnya sederhana: klien mengirim permintaan ke API, melewati
+middleware autentikasi, kemudian controller memproses data di
+database, dan hasilnya dikembalikan dalam bentuk JSON.
+
+===============================================================
+SLIDE 5 - USE CASE & ALUR PENGGUNA (USER FLOW)
+===============================================================
+
+Mari kita lihat use case diagramnya.
+
+Ada dua aktor. Yang pertama Pengembang, yang bisa register, login,
+mengelola API key, dan melakukan CRUD data. Yang kedua Konsumen API,
+yang hanya membaca data dengan API key.
+
+Alur penggunaannya seperti ini: pengguna mendaftar, lalu login untuk
+mendapatkan token JWT. Setelah itu membuat API key. Nah, API key
+inilah yang dibagikan ke konsumen atau aplikasi pihak ketiga. Ketika
+konsumen memanggil endpoint GET, dia cukup mengirimkan x-api-key.
+Jika key valid, data dikembalikan. Jika tidak, server menjawab 401
+Unauthorized.
+
+===============================================================
+SLIDE 6 - ERD / RANCANGAN DATABASE
+===============================================================
+
+Berikutnya, rancangan database. Total ada lima tabel.
+
+Tabel pengembang menyimpan akun pengguna. Tabel api_keys menyimpan
+kunci API milik pengembang. Tabel blockchain menyimpan data utama,
+yaitu nama, simbol, deskripsi, dan tahun rilis. Tabel kategori
+menyimpan kategori seperti DeFi, NFT, dan Layer 1. Terakhir, ada
+tabel BlockchainKategori sebagai tabel relasi many-to-many.
+
+Relasinya: satu pengembang memiliki banyak blockchain, satu
+pengembang memiliki banyak API key, dan banyak blockchain terhubung
+dengan banyak kategori.
+
+Jadi memenuhi syarat minimal dua tabel, bahkan lebih.
+
+===============================================================
+SLIDE 7 - DEMO APLIKASI (LANGSUNG DI POSTMAN)
+===============================================================
+
+Sekarang saya akan mendemonstrasikan langsung cara kerja aplikasinya.
+Saya buka Postman. Base URL-nya adalah
+https://236-final-project.vercel.app
+
+AKSI 1 - REGISTER:
+1. Klik request "Register Pengembang", method POST ke /api/register.
+2. Body berisi nama, email, dan password.
+3. Klik Send. Hasilnya status 201, "Registrasi berhasil".
+
+AKSI 2 - LOGIN:
+1. Klik request "Login", POST ke /api/login dengan email dan password
+   tadi.
+2. Hasilnya 200 dan ada token JWT. Token ini otomatis tersimpan ke
+   variabel token di Postman, jadi request berikutnya sudah terisi
+   otomatis.
+
+AKSI 3 - CEK ID AKUN:
+1. Klik GET /api/me. Hasilnya menampilkan id, nama, email.
+   Catat id-nya, misalnya 1, untuk dipakai sebagai pengembang_id.
+
+AKSI 4 - BUAT API KEY:
+1. Klik "Buat API Key", POST ke /api/apikey.
+2. Body berisi nama key, misalnya "Production Key".
+3. Hasilnya 201 dan server memberikan kunci berbentuk blk_ diikuti
+   karakter acak. Inilah API key untuk konsumen.
+
+AKSI 5 - TAMBAH DATA BLOCKCHAIN:
+1. Klik "Tambah Blockchain", POST ke /api/blockchain.
+2. Body contoh:
+   {
+     "nama": "Solana",
+     "simbol": "SOL",
+     "deskripsi": "Blockchain berkecepatan tinggi",
+     "tahun_rilis": 2020,
+     "pengembang_id": 1,
+     "kategori_ids": [1, 2]
+   }
+3. Hasilnya 201, "Blockchain berhasil ditambahkan".
+   Di sini terlihat data blockchain sekaligus nama pengembangnya.
+
+AKSI 6 - AKSES DATA SEBAGAI KONSUMEN:
+1. Klik GET /api/blockchain. Ganti metode autentikasi menjadi header
+   x-api-key, isi dengan API key yang tadi dibuat.
+2. Klik Send. Hasilnya 200, dan data blockchain tampil dalam JSON.
+
+Ini membuktikan bahwa konsumen bisa mengambil data hanya dengan API
+key, tanpa perlu username dan password.
+
+===============================================================
+SLIDE 8 - PENGUJIAN
+===============================================================
+
+Untuk pengujian, saya melakukan beberapa skenario:
+
+Pertama, registrasi dan login: hasilnya berhasil, 200 dan 201.
+
+Kedua, akses data tanpa autentikasi: server menjawab 401
+Unauthorized, artinya keamanan bekerja.
+
+Ketiga, akses data dengan API key valid: hasilnya 200 dan data
+dikembalikan.
+
+Keempat, akses data dengan API key yang salah: server menjawab 401.
+
+Kelima, operasi tulis POST, PUT, dan DELETE menggunakan JWT:
+semua berjalan sesuai harapan.
+
+Seluruh pengujian ini terekam di Postman dan bisa dilihat pada
+dokumentasi laporan.
+
+===============================================================
+SLIDE 9 - DEPLOYMENT DI VERCEL
+===============================================================
+
+Aplikasi ini sudah di-deploy di Vercel dan bisa diakses publik di:
+https://236-final-project.vercel.app
+
+Caranya, repository GitHub dihubungkan ke Vercel. Environment
+variables seperti POSTGRES_URL, JWT_SECRET, dan JWT_EXPIRES diatur
+pada dashboard Vercel. Setiap push ke GitHub, Vercel otomatis
+melakukan deployment ulang.
+
+Kelebihannya, aplikasi berjalan secara serverless, jadi tidak perlu
+mengelola server sendiri, dan bisa diakses dari mana saja.
+
+===============================================================
+SLIDE 10 - KESIMPULAN
+===============================================================
+
+Sebagai kesimpulan, ada empat hal yang berhasil saya capai.
+
+Pertama, Blockchain API berhasil dibangun sebagai layanan SaaS yang
+menyediakan data menggunakan API key, dengan alur register, login
+JWT, buat API key, lalu akses data.
+
+Kedua, autentikasi ganda, JWT untuk pengelolaan dan API key untuk
+konsumsi data, berhasil diimplementasikan.
+
+Ketiga, data yang disediakan berjumlah 60 data dengan 5 tabel dan
+relasi many-to-many, melebihi syarat minimal 50 data.
+
+Dan keempat, aplikasi berhasil di-deploy di Vercel dan dapat diakses
+secara publik.
+
+===============================================================
+SLIDE 11 - PENUTUP & SESI TANYA JAWAB
+===============================================================
+
+Demikian presentasi yang dapat saya sampaikan. Secara singkat, project
+ini membuktikan bahwa sebuah layanan API SaaS dengan API key, JWT,
+database relasional, dan deployment cloud, dapat dibangun menggunakan
+Express.js, PostgreSQL, dan Vercel.
+
+Saya ucapkan terima kasih atas perhatian Bapak/Ibu penguji dan
+teman-teman. Mohon maaf apabila ada kekurangan. Saya persilakan
+kepada Bapak/Ibu untuk sesi tanya jawab.
+
+Wassalamu'alaikum warahmatullahi wabarakatuh.
+
+===============================================================
+CATATAN UNTUK SESI TANYA JAWAB
+===============================================================
+
+Pertanyaan yang mungkin diajukan dan jawaban singkatnya:
+
+1. "Kenapa pakai API key dan bukan langsung JWT?"
+   Jawab: API key lebih sederhana untuk konsumen/konsumen otomatis,
+   tidak kadaluwarsa seperti JWT, dan bisa di-nonaktifkan kapan saja
+   dari dashboard. JWT dipakai untuk pengelolaan akun yang lebih
+   aman.
+
+2. "Apakah 50 data itu nyata?"
+   Jawab: Data menggunakan nama dan simbol blockchain asli seperti
+   Bitcoin, Ethereum, Solana, dan lainnya. Deskripsi disusun agar
+   informatif untuk keperluan pembelajaran.
+
+3. "Bagaimana keamanan password?"
+   Jawab: Password di-hash menggunakan bcrypt dengan 10 salt rounds,
+   jadi tidak disimpan sebagai teks biasa.
+
+4. "Bagaimana jika API key bocor?"
+   Jawab: Pemilik key bisa menonaktifkan key tersebut melalui
+   DELETE /api/apikey/:id, atau membuat key baru.
+
+5. "Kenapa GET bisa diakses API key tapi POST tidak?"
+   Jawab: Karena GET adalah operasi baca yang aman dibagikan ke
+   konsumen. Operasi tulis berisiko, sehingga hanya boleh dilakukan
+   pemilik akun yang login dengan JWT.
+
+===============================================================
+SELESAI - SEMANGAT PRESENTASINYA!  [PERKIRAAN 10-15 MENIT]
+===============================================================
+
